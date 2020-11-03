@@ -1,0 +1,20 @@
+{
+  "name": "uniqueurls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "lodash": "^4.17.20",
+    "next": "^10.0.0",
+    "normalize-url": "^5.3.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-shorten-url": "^1.0.5"
+  }
+}
