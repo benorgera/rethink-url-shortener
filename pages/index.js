@@ -11,18 +11,18 @@ const url = require('url');
 
 const minShortUrlLen = 1;
 
-// from stackoverflow, make random string over alphabet of n chars
+// from stackoverflow, make random string over alphabet
 const alphabet     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 const alphabetSize = alphabet.length;
 function makeid(length) {
    var result           = '';
-   for ( var i = 0; i < length; i++ ) {
+   for (var i = 0; i < length; i++) {
       result += alphabet.charAt(Math.floor(Math.random() * alphabetSize));
    }
    return result;
 }
 
-const logBase = (x, y) =>  Math.log(y) / Math.log(x);
+const logBase = (x, y) => Math.log(y) / Math.log(x);
 
 function Shortener() {
 
@@ -45,14 +45,13 @@ function Shortener() {
 		if (lookup !== undefined) 
 			alert(`URL "${urlToShorten}" was already shortened to "${toUserUrl(lookup)}"`);
 		else {
-			// need n >= log_(characterslen) (2 * # of urls redirecting)
-			// this ensures constant runtime of while loop with high probability
+			// need n >= log_(alphabetSize) (2 * # of urls redirecting)
+			// this ensures constant runtime of loop with high probability
 			const enoughUidChars = Math.ceil(logBase(alphabetSize, 2 * uidMap.size || 2)),
 			      uidLen = enoughUidChars < minShortUrlLen ? minShortUrlLen : enoughUidChars;
 
-			console.log(uidLen)
-
 			var uid = undefined;
+			// loop runs 2 times in expectation, O(1) time with high probability
 			do {
 				uid = makeid(uidLen);
 			} while (uidMap.has(uid));
